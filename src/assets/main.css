@@ -1,0 +1,20 @@
+* {
+  overflow-x:hidden;
+  font-family: "Ubuntu", sans-serif;
+  font-weight:400;
+  margin:0;
+  padding:0;
+  .bm-burger-button {
+    z-index: 1000;
+  }
+}
+
+
+.active {
+  a {
+    color: #DAA520!important;
+    text-decoration: underline !important;
+    font-weight: bold !important;
+
+  }
+}
