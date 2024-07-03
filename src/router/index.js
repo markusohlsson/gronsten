@@ -6,7 +6,7 @@ import About from '../components/About.vue'
 import Contact from '../components/Contact.vue'
 
 const router = createRouter({
-  history: createWebHistory(import.meta.env.BASE_URL),
+  history: createWebHistory('/gronsten/'),
   routes: [
     {
       path: '/',

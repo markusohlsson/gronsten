@@ -7,12 +7,22 @@
         </div>
         <div class="navigation-desk">
             <ul>
-                <li :class="{ active: isActive('/') }"><a href="/">Hem</a></li>
-                <li :class="{ active: isActive('/produkter') }"><a href="/produkter">Produkter</a></li>
-                <li :class="{ active: isActive('/bigardar') }"><a href="/bigardar">Bigårdar</a></li>
-                <li :class="{ active: isActive('/om-oss') }"><a href="/om-oss">Om Oss</a></li>
-                <li :class="{ active: isActive('/kontakt') }"><a href="/kontakt">Kontakt</a></li>
-            </ul>
+            <li :class="{ active: isActive('/') }">
+            <router-link :to="'/'" tag="a" exact-active-class="active">Hem</router-link>
+            </li>
+            <li :class="{ active: isActive('/produkter') }">
+            <router-link :to="'/produkter'" tag="a" exact-active-class="active">Produkter</router-link>
+            </li>
+            <li :class="{ active: isActive('/bigardar') }">
+            <router-link :to="'/bigardar'" tag="a" exact-active-class="active">Bigårdar</router-link>
+            </li>
+            <li :class="{ active: isActive('/om-oss') }">
+            <router-link :to="'/om-oss'" tag="a" exact-active-class="active">Om Oss</router-link>
+            </li>
+            <li :class="{ active: isActive('/kontakt') }">
+            <router-link :to="'/kontakt'" tag="a" exact-active-class="active">Kontakt</router-link>
+            </li>
+        </ul>
         </div>
     </div>
 </template>
