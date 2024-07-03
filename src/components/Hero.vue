@@ -6,7 +6,7 @@
       <div class="text-overlay">
         <h1 class="gronsten-title">Grönstenen Biodling</h1>
         <div class="line-wrapper">
-            <h1>NÄRPRODUCERAT</h1>
+            <h1>NÄRPRODUCERAD</h1>
         </div>
         <h2>SVENSK HONUNG</h2>
         <h3>Från egen bigård i Hässelby</h3>
@@ -87,5 +87,6 @@ h3 {
 .line-wrapper::after {
   margin-left: 10px; /* Space between line and text */
 }
+
 
 </style>

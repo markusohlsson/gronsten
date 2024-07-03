@@ -1,8 +1,8 @@
 <template>
     <div class="navigationContainer">
         <div style="overflow-y:hidden;">
-            <a href="#">
-                <img class="logo" src="../assets/logo.png" />
+            <a href="/">
+                <img class="logo" src="../assets/navlogo.png" style="height:100px;padding-left:15px;" />
             </a>
         </div>
         <div class="navigation-desk">
@@ -73,9 +73,11 @@ export default {
             display:flex;
             gap:10px;
             justify-content: space-evenly;
-
+            list-style-type: none;
+            padding-left:0;
             li {
                 a{
+                    
                     text-decoration: none;
                     color:#36454F;
                     font-weight: 400;
