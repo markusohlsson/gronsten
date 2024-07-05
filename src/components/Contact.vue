@@ -68,7 +68,7 @@ export default {
             email:'',
             subject:'',
             message:'',
-            messageSent: true,
+            messageSent: false,
             error: false,
         }
     },
