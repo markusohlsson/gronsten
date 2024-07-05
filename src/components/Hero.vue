@@ -1,7 +1,7 @@
 <template>
     <div class="video-container">
       <video autoplay muted loop>
-        <source src="../assets/Hero.mp4" loading="lazy">
+        <source src="../assets/Hero.mp4">
       </video>
       <div class="text-overlay">
         <h1 class="gronsten-title">Grönstenen Biodling</h1>
