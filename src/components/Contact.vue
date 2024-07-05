@@ -68,7 +68,7 @@ export default {
             email:'',
             subject:'',
             message:'',
-            messageSent: false,
+            messageSent: true,
             error: false,
         }
     },
@@ -199,7 +199,32 @@ export default {
         justify-content: center;
         margin-bottom:25px;
     }
-
+    .contact-confirmation {
+    position: fixed;
+    right: 10%;
+    top: 50%;
+    transform: translateY(-50%);
+    width: 80vw;
+    height: 50vh;
+    background-color: white;
+    text-align: center;
+    border:1px solid grey;
+  .close {
+    position:absolute;
+    top:0;
+    right:0;
+    font-size:45px;
+    color:#36454F
+  }
+  .checkmark {
+    font-size:300px;
+    color:rgb(0, 190, 0);
+  }
+  .error {
+    font-size:300px;
+    color:red;
+  }
+}
 }
 @media (min-width: 769px) {
 .contact-hero-wrapper {
