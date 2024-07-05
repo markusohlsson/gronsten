@@ -1,16 +1,16 @@
 <template>
     <div>
-        <div style="display: flex;justify-content: space-between;position:relative;margin-bottom:100px;">
-        <div style="display:flex;align-items:center;justify-content:center;">
-            <h1 class="slide-in-left" style="font-size: 240px;color:#DAA520">Kontakt</h1>
-            <div style="position:absolute;width:30%;left:15px;bottom:15px;">
-                <p style="color:#36454F">Lorem ipsum dolor sit amet consectetur adipisicing elit. Velit facere deserunt similique exercitationem labore error omnis rem, assumenda placeat quo doloribus necessitatibus fugit ipsum voluptatibus minima iure harum nulla repellat.</p>
+        <div class="contact-hero-wrapper" >
+            <div class="contact-hero-text-wrapper">
+                <h1 class="slide-in-left contact-hero-title">Kontakt</h1>
+                <div class="contact-hero-text">
+                    <p>Lorem ipsum dolor sit amet consectetur adipisicing elit. Velit facere deserunt similique exercitationem labore error omnis rem, assumenda placeat quo doloribus necessitatibus fugit ipsum voluptatibus minima iure harum nulla repellat.</p>
+                </div>
+            </div>
+            <div class="slide-in-right">
+                <img class="contact-hero-image" src="../assets/apiary.jpg" loading="lazy">
             </div>
         </div>
-        <div class="slide-in-right">
-            <img style="height:70vh; width:30vw; object-fit: cover;margin-top:100px;margin-right:15px;" src="../assets/apiary.jpg">
-        </div>
-    </div>
         <div class="contact-wrapper" >
             <form class="contact-form" @submit.prevent="onSubmit">
                 <label for="name">Namn</label>
@@ -42,7 +42,8 @@
         </div>
     </div>
     <div class="google-maps">
-        <iframe src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d2032.5543617569808!2d17.824028777705806!3d59.37377617463588!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x465f9fef935a29f7%3A0x45673cfacd9a95e4!2sLupinv%C3%A4gen%2034%2C%20165%2070%20H%C3%A4sselby!5e0!3m2!1ssv!2sse!4v1720023822980!5m2!1ssv!2sse" width="100%" height="600" style="border:0;" allowfullscreen="" loading="lazy" referrerpolicy="no-referrer-when-downgrade"></iframe>  
+        <iframe v-if="isMobile" src="https://www.google.com/maps/embed?pb=!1m14!1m8!1m3!1d2032.5543722215014!2d17.826604000000003!3d59.37377600000001!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x465f9fef935a29f7%3A0x45673cfacd9a95e4!2sLupinv%C3%A4gen%2034%2C%20165%2070%20H%C3%A4sselby!5e0!3m2!1ssv!2sse!4v1720210089942!5m2!1ssv!2sse" width="300" height="175" style="border:0;" allowfullscreen="" loading="lazy" referrerpolicy="no-referrer-when-downgrade"></iframe>
+        <iframe v-if="!isMobile" src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d2032.5543617569808!2d17.824028777705806!3d59.37377617463588!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x465f9fef935a29f7%3A0x45673cfacd9a95e4!2sLupinv%C3%A4gen%2034%2C%20165%2070%20H%C3%A4sselby!5e0!3m2!1ssv!2sse!4v1720023822980!5m2!1ssv!2sse" width="100%" height="600" style="border:0;" allowfullscreen="" loading="lazy" referrerpolicy="no-referrer-when-downgrade"></iframe>  
     </div>
     <div class="contact-confirmation" v-if="messageSent">
         <span class="material-symbols-outlined close" @click="messageSent = false">close</span>
@@ -70,6 +71,12 @@ export default {
             messageSent: false,
             error: false,
         }
+    },
+    computed: {
+        isMobile() {
+    // Assuming mobile view is less than 768px width
+    return window.innerWidth < 768;
+  	},
     },
     methods : {
         async onSubmit() {
@@ -103,10 +110,127 @@ export default {
         }
 
         }
-    }
+    },
 }
 </script>
 <style scoped>
+@media (max-width: 768px) {
+    .contact-hero-wrapper {
+        display:flex;
+        flex-direction: column-reverse;
+        margin-bottom:50px;
+        position:relative;
+        .contact-hero-text-wrapper {
+            .contact-hero-title{
+                font-size: 72px;
+                text-align:center;
+                color:#DAA520;
+            }
+            .contact-hero-text {
+                font-size:16px;
+                padding:10px;
+                margin:5px;
+                color:#36454F;
+            }
+        }
+        .contact-hero-image {
+            height:30vh;
+            object-fit:cover;
+            width:100%;
+        }
+    }
+    .contact-form {
+        color:#36454F;
+    display:flex;
+    flex-direction: column;
+    align-items: center;
+    gap:5px;
+    font-size:20px;
+    input {
+        width:80%;
+        height:30px;
+        border:1px solid #36454F;
+    }
+    textarea {
+        height: 200px;
+        width:80%;
+        border: 1px solid #36454F;
+    }
+    button {
+        background-color:#DAA520;
+        color:#36454F;
+        width:150px;
+        border:0;
+        padding:20px;
+        margin-top:10px;
+        border-radius: 15px;
+        font-size:16px;
+
+    }
+}
+.material-symbols-outlined {
+    margin-right:5px;
+    font-size:26px;
+    overflow: hidden;
+}
+.contact-details {
+    margin-top:25px;
+    margin-bottom:25px;
+    text-align: center;
+    display:flex;
+    flex-direction: column;
+    justify-content: space-evenly;
+    h2 {
+        margin-bottom:10px;
+        font-size:24px;
+        color: #DAA520;
+        vertical-align: middle;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        margin-top:10px;
+    }
+    h3 {
+        font-size:16px;
+    }
+}
+    .google-maps {
+        display:flex;
+        justify-content: center;
+        margin-bottom:25px;
+    }
+
+}
+@media (min-width: 769px) {
+.contact-hero-wrapper {
+    display: flex;
+    justify-content: space-between;
+    position:relative;
+    margin-bottom:100px;
+}
+.contact-hero-text-wrapper {
+   display:flex;
+   align-items:center;
+   justify-content:center;
+}
+.contact-hero-title {
+    font-size: 240px;
+    color:#DAA520;
+}
+.contact-hero-text {
+    position:absolute;
+    width:30%;
+    left:15px;
+    bottom:15px;
+    color:#36454F
+}
+.contact-hero-image {
+    height:70vh; 
+    width:30vw; 
+    object-fit: cover;
+    margin-top:100px;
+    margin-right:15px;
+}
 .contact-confirmation {
     position: fixed;
   right: 25%;
@@ -190,5 +314,6 @@ export default {
         align-items: center;
 
     }
+}
 }
 </style>

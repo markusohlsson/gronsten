@@ -5,8 +5,8 @@
             <p>Endast bokade besök</p>
         </div>
         <div class="logo">
-            <img src="../assets/logo.png">  
-            <p>Copyright © All Rights Reserved</p>
+            <img src="../assets/logo.png" loading="lazy">  
+            <p >Copyright © All Rights Reserved</p>
         </div>
         <div class="footer-find-wrapper">
             <h1>Hitta Oss</h1>
@@ -15,55 +15,86 @@
             <p><span class="bold">Telefon: </span> 0708-88 77 10</p>
         </div>
     </div>
+
 </template>
 <script>
 </script>
 <style scoped>
+    /* @media (max-width:768px) {
+    } */
 .footer-container {
-    bottom: 0;
-    height:150px;
-    padding:10px;
-    display:flex;
-    width:100%;
-    justify-content: space-evenly;
-    align-items: center;
-    background-color: #ffffff;
-    color:#36454F;
-    flex-wrap:wrap;
-    box-shadow: 0 -1px 5px rgba(54, 69, 79, 0.5); /* horizontal offset, vertical offset, blur radius, color */
-    .logo {
+    @media(max-width:768px) {
+        margin-top:10px;
+        margin-bottom:10px;
         text-align: center;
-        img {
-            height:120px;
-            transform:scale(1.1);
-        }
-    }
-    .copyright {
-        width:100%;
-        text-align: center;
-    }
-    .footer-open-wrapper {
-        height:100%;
         display:flex;
         flex-direction: column;
-        justify-content:flex-start;
-        gap:5px;
-        h1 {
-            margin-top:10px;
+        gap:10px;
+        .footer-open-wrapper {
+            order:1;
+            h1 {
+                color:#DAA520;
+            }
+        }
+        .logo {
+            order:3;
+            img {
+                height:150px;
+            }
+        }
+        .footer-find-wrapper {
+            order:2;
+            h1 {
+                color: #DAA520;
+            }
         }
     }
-    .footer-find-wrapper {
-        height:100%;
+    @media(min-width:769px) {
+        height:150px;
+        padding:10px;
         display:flex;
-        flex-direction:column;
-        justify-content: flex-start;
-        gap:5px;
-        h1 {
-            margin-top:10px;
+        justify-content: space-evenly;
+        align-items: center;
+        background-color: #ffffff;
+        color:#36454F;
+        flex-wrap:wrap;
+        box-shadow: 0 -1px 5px rgba(54, 69, 79, 0.5); /* horizontal offset, vertical offset, blur radius, color */
+        .logo {
+            text-align: center;
+            img {
+                height:120px;
+                /* transform:scale(1.1); */
+            }
         }
-    }
-    .bold {
-        font-weight:800;
+        .copyright {
+            flex: 0 0 auto;
+            width:100%;
+            text-align: center;
+            margin-bottom:10px;
+        }
+        .footer-open-wrapper {
+            height:100%;
+            display:flex;
+            flex-direction: column;
+            justify-content:flex-start;
+            gap:5px;
+            h1 {
+                margin-top:10px;
+            }
+        }
+        .footer-find-wrapper {
+            height:100%;
+            display:flex;
+            flex-direction:column;
+            justify-content: flex-start;
+            gap:5px;
+            h1 {
+                margin-top:10px;
+            }
+        }
+        .bold {
+            font-weight:800;
+        }
     }
 }
 </style>

@@ -1,7 +1,7 @@
 <template>
     <div class="video-container">
       <video autoplay muted loop>
-        <source src="../assets/Hero.mp4">
+        <source src="../assets/Hero.mp4" loading="lazy">
       </video>
       <div class="text-overlay">
         <h1 class="gronsten-title">Grönstenen Biodling</h1>
@@ -16,13 +16,21 @@
 
 
 <style scoped>
+  /* @media (max-width: 768px) {} */
 .gronsten-title {
+
+  @media (max-width: 768px) {
+    font-size:44px;
+  }
   font-size:84px;
 }
 .video-container {
+  @media (max-width:768px) {
+    height:100vh;
+  }
   position: relative;
   height: 90vh;
-  width: 100vw;
+  width: 100%;
 }
 
 video {
@@ -37,11 +45,12 @@ video {
 
 .text-overlay {
   position: absolute;
-  top: 50%; /* Center vertically */
+
   left: 50%;
+    top: 50%; /* Center vertically */
   transform: translate(-50%, -50%); /* Center horizontally and adjust for height */
   text-align: center;
-  color: #F5F5DC; /* Adjust text color as needed */
+  color: white;
   z-index: 1; /* Ensure text overlay stays above the video */
 }
 
@@ -52,16 +61,25 @@ h1, h2, h3 {
 
 }
 h1 {
+  @media (max-width: 768px) {
+    font-size:18px;
+  }
     font-size: 24px;
 }
 
 h2 {
+  @media (max-width: 768px) {
+    font-size:28px;
+  }
     text-shadow: #0f0f0f 3px 3px 3px;
     font-size:64px;
     color: #DAA520;
 }
 
 h3 {
+  @media (max-width: 768px) {
+    font-size:16px;
+  }
     font-size:28px;
 }
 
@@ -77,7 +95,7 @@ h3 {
   content: '';
   flex: 1;
   height: 2px; /* Adjust height as needed */
-  background-color: #F5F5DC; /* Line color */
+  background-color: white; /* Line color */
 }
 
 .line-wrapper::before {
