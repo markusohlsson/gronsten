@@ -1,6 +1,6 @@
 <template>
     <div class="video-container">
-      <video autoplay muted loop>
+      <video autoplay muted loop playsinline>
         <source src="../assets/Hero.mp4">
       </video>
       <div class="text-overlay">
