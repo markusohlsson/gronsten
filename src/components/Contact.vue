@@ -11,8 +11,8 @@
                 <img class="contact-hero-image" src="../assets/apiary.jpg" loading="lazy">
             </div>
         </div>
-        <div class="contact-wrapper" >
-            <form class="contact-form" @submit.prevent="onSubmit">
+        <div class="contact-wrapper">
+            <form class="contact-form" @submit.prevent="onSubmit" v-if="displayContact">
                 <label for="name">Namn</label>
                 <input name="name" type="text" placeholder="John Doe" v-model="name" required>
                 <label for="email">Email</label>
@@ -23,6 +23,18 @@
                 <textarea name="message" type="text" placeholder="Meddelande..." v-model="message" required></textarea>
                 <button type="submit">Skicka</button>
             </form>
+            <div v-if="messageSent" class="contact-confirmation">
+                <img src="../assets/icons8-check.gif" style="height:150px;">
+                <h2>Ditt meddelande har skickats</h2>
+                <p>Vi återkommer så fort som möjligt</p>
+            </div>
+            <div v-if="error" class="contact-confirmation">
+                <img src="../assets/icons8-error.gif" style="height:150px;">
+                <h2>Ditt meddelande har inte skickats skickats</h2>
+                <p>Vänligen försök igen eller kontakta oss direkt på</p>
+                <p>info@gronsten.se</p>
+                <p>+46 (0) 708 88 77 10</p>
+            </div>
             <div class="contact-details">
                 <div>
                     <h2><span class="material-symbols-outlined">pin_drop</span>Adress</h2>
@@ -45,20 +57,6 @@
         <iframe v-if="isMobile" src="https://www.google.com/maps/embed?pb=!1m14!1m8!1m3!1d2032.5543722215014!2d17.826604000000003!3d59.37377600000001!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x465f9fef935a29f7%3A0x45673cfacd9a95e4!2sLupinv%C3%A4gen%2034%2C%20165%2070%20H%C3%A4sselby!5e0!3m2!1ssv!2sse!4v1720210089942!5m2!1ssv!2sse" width="300" height="175" style="border:0;" allowfullscreen="" loading="lazy" referrerpolicy="no-referrer-when-downgrade"></iframe>
         <iframe v-if="!isMobile" src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d2032.5543617569808!2d17.824028777705806!3d59.37377617463588!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x465f9fef935a29f7%3A0x45673cfacd9a95e4!2sLupinv%C3%A4gen%2034%2C%20165%2070%20H%C3%A4sselby!5e0!3m2!1ssv!2sse!4v1720023822980!5m2!1ssv!2sse" width="100%" height="600" style="border:0;" allowfullscreen="" loading="lazy" referrerpolicy="no-referrer-when-downgrade"></iframe>  
     </div>
-    <div class="contact-confirmation" v-if="messageSent">
-        <span class="material-symbols-outlined close" @click="messageSent = false">close</span>
-        <span class="material-symbols-outlined checkmark" >check</span>
-        <h2>Ditt meddelande har skickats</h2>
-        <p>Vi återkommer så fort som möjligt</p>
-    </div>
-    <div class="contact-confirmation" v-if="error">
-        <span class="material-symbols-outlined close" @click="messageSent = false">close</span>
-        <span class="material-symbols-outlined error" >error</span>
-        <h2>Ditt meddelande har inte skickats skickats</h2>
-        <p>Vänligen försök igen eller kontakta oss direkt på</p>
-        <p>info@gronsten.se</p>
-        <p>+46 (0) 708 88 77 10</p>
-    </div>
 </template>
 <script>
 export default {
@@ -77,6 +75,9 @@ export default {
     // Assuming mobile view is less than 768px width
     return window.innerWidth < 768;
   	},
+        displayContact () {
+            return !this.messageSent && !this.error;
+        }
     },
     methods : {
         async onSubmit() {
@@ -114,6 +115,7 @@ export default {
 }
 </script>
 <style scoped>
+
 @media (max-width: 768px) {
     .contact-hero-wrapper {
         display:flex;
@@ -200,31 +202,19 @@ export default {
         margin-bottom:25px;
     }
     .contact-confirmation {
-    position: fixed;
-    right: 10%;
-    top: 50%;
-    transform: translateY(-50%);
-    width: 80vw;
-    height: 50vh;
-    background-color: white;
-    text-align: center;
-    border:1px solid grey;
-  .close {
-    position:absolute;
-    top:0;
-    right:0;
-    font-size:45px;
-    color:#36454F
-  }
-  .checkmark {
-    font-size:300px;
-    color:rgb(0, 190, 0);
-  }
-  .error {
-    font-size:300px;
-    color:red;
-  }
-}
+        background-color: white;
+        display:flex;
+        flex-direction:column;
+        justify-content: center;
+        align-items: center;
+        h2 {
+            font-size:18px;
+        }
+        p {
+            font-size:14px;
+        }
+
+    }
 }
 @media (min-width: 769px) {
 .contact-hero-wrapper {
@@ -257,15 +247,13 @@ export default {
     margin-right:15px;
 }
 .contact-confirmation {
-    position: fixed;
-  right: 25%;
-  top: 50%;
-  transform: translateY(-50%);
   width: 40vw;
   height: 50vh;
   background-color: white;
-  text-align: center;
-  border:1px solid grey;
+  display:flex;
+  flex-direction:column;
+  justify-content: center;
+  align-items: center;
   .close {
     position:absolute;
     top:0;
