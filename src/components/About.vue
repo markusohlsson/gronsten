@@ -17,9 +17,13 @@
 			<div class="about-mobile">
 			<span class="material-symbols-outlined left-arrow" @click="prevItem">arrow_back_ios</span>
 			<ul class="about-list" ref="aboutList">
-				<li v-for="(item, idx) in currentItem" class="about-list-item" :key="idx">{{ item }}</li>
+				<li v-for="(item, idx) in currentItem" class="about-list-item" :key="idx" :class="animationClass">{{ item }}</li>
 			</ul>
 			<span class="material-symbols-outlined right-arrow" @click="nextItem">arrow_forward_ios</span>
+			</div>
+			<div class="pause-play-container">
+				<span class="material-symbols-outlined pause-play-button" v-if="isLoopPaused"  @click="toggleLoop">play_circle</span>
+				<span class="material-symbols-outlined pause-play-button" v-else  @click="toggleLoop">pause_circle</span>
 			</div>
 			<div class="progress-bar-container">
 				<div class="progress-bar" :style="{ width: progressBarWidth }"></div>
@@ -27,6 +31,7 @@
 					<img src="../assets/bee.ico" alt="Favicon" class="favicon">
 				</div>
 			</div>
+			
 		</div>
 		<div class="image-wrapper">
 			<img src="../assets/bigard_1.jpg" loading="lazy"/>
@@ -48,6 +53,9 @@ export default {
       ],
 		currentIndex: 0,
 		swipeDirection: null,
+		animationClass:'',
+		isLoopPaused: false,
+		loopIntervalId: null,
     };
   },
   computed: {
@@ -80,7 +88,7 @@ export default {
   },
   methods: {
 	prevItem() {
-
+		this.animationClass = 'slide-in-left';
 		if(this.currentIndex > 0) {
 			this.swipeDirection = 'left';
 			this.currentIndex -= 1;
@@ -88,8 +96,10 @@ export default {
 			this.swipeDirection = null;
 			this.currentIndex = this.items.length -1;
 		}
+		this.resetAnimationClass();
 	},
 	nextItem() {
+		this.animationClass = 'slide-in-right';
 		if(this.currentIndex < this.items.length -1) {
 			this.swipeDirection = 'right';
 			this.currentIndex +=1;
@@ -97,6 +107,7 @@ export default {
 			this.swipeDirection = null;
 			this.currentIndex = 0;
 		}
+		this.resetAnimationClass();
 	},
 	handleSwipe(event) {
 		if(event.direction === Hammer.DIRECTION_LEFT) {
@@ -104,12 +115,42 @@ export default {
 		} else if (event.direction === Hammer.DIRECTION_RIGHT) {
 			this.prevItem();
 		}
-	}
+	},
+	resetAnimationClass() {
+      setTimeout(() => {
+        this.animationClass = '';
+      }, 500);
+    },
+	toggleLoop() {
+      this.isLoopPaused = !this.isLoopPaused;
+      if (!this.isLoopPaused) {
+        // Start the loop if not paused
+        this.startLoop();
+      } else {
+        // Clear the interval if paused
+        clearInterval(this.loopIntervalId);
+      }
+    },
+    startLoop() {
+      this.loopIntervalId = setInterval(() => {
+        if (!this.isLoopPaused) {
+          this.nextItem();
+        }
+      }, 3000); // Change currentItem every 3 seconds
+    }
   },
   mounted() {
 	const hammer = new Hammer(this.$refs.aboutList);
 	hammer.get('swipe').set({ direction: Hammer.DIRECTION_HORIZONTAL });
     hammer.on('swipe', this.handleSwipe);
+	if(this.isMobile) {
+		this.startLoop();
+	}
+
+  },
+  beforeDestroy() {
+    // Clean up interval when component is destroyed
+    clearInterval(this.loopIntervalId);
   }
 };
 </script>
@@ -117,7 +158,13 @@ export default {
 <style scoped>
 
 @media(max-width:769px) {
-
+	.pause-play-container {
+		text-align:center;
+		color:#DAA520;
+		.pause-play-button {
+			font-size:32px;
+		}
+	}
 	.about-hero-wrapper {
 		display:flex;
 		flex-direction:column;
@@ -225,6 +272,9 @@ export default {
 }
 	}
 @media (min-width:769px) {
+	.pause-play-container {
+		display:none;
+	}
 	.progress-bar-container {
 		display: none;
 	}
